@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const UploadForm = () => {
   const [file, setFile] = useState(null);
@@ -10,10 +11,25 @@ const UploadForm = () => {
     setfileName(imageFile.name);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const res = await axios.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } catch (error) {}
+  };
+
   return (
-    <form>
-      <label htmlFor="image">{fileName}</label>
-      <input id="image" type="file" onChange={handleChangeInput} />
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input id="image" type="file" onChange={handleChangeInput} />
+      </div>
       <button type="submit">제출</button>
     </form>
   );
