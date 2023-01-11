@@ -1,10 +1,13 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import UploadForm from "./components/UploadForm";
 
 function App() {
   return (
     <div>
+      <ToastContainer />
       <h2>사진첩</h2>
       <UploadForm />
     </div>
